@@ -25,6 +25,14 @@ body{
     grid-template-columns: repeat(3,auto);
 }
 
+
+.board.x .cell:not(.x):not(.circlo):hover::after,
+.board.x .cell:not(.x):not(.circlo:not(.x):not(.circlo)):hover::before,
+.board.circlo .cell:not(.x):not(.circlo):hover::after,
+.board.x .cell:not(.x):not(.circlo):hover::before{
+    background:rgba(255,255,255,0.3) !important;
+}
+
 /*celula*/
 .cell{
     width:100px;
@@ -33,6 +41,11 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
+    position:relative;
+}
+
+.cell.x, .cell.circlo{
+    cursor: not-allowed;
 }
 
 .cell:nth-child(1),
@@ -59,7 +72,75 @@ body{
     border-right:none
 }
 
+/*x*/
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circlo):hover::after,
+.board.x .cell:not(.x):not(.circlo:not(.x):not(.circlo)):hover::before{
+    content:"";
+    height: calc(100px * 0.15);
+    width: calc(100px * 0.9);
+    background:white;
+    position:absolute;
+    
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circlo):hover::before{
+    transform:rotate(45deg)
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circlo):hover::after{
+    transform:rotate(-45deg)
+}
+
+/*circulo*/
+.cell.circlo::before,
+.cell.circlo::after,
+.board.circlo .cell:not(.x):not(.circlo):hover::after,
+.board.circlo .cell:not(.x):not(.circlo):hover::after{
+    content:"";
+    height: calc(100px * 0.9);
+    width: calc(100px * 0.9);
+    background:white;
+    position:absolute;
+    border-radius:50%;
+}
+
+
 /*Messagem*/
 .winnig-message{
-    display:none
+    display:none;
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    justify-content:center;
+    align-items:center;
+    background-color:rgba(0,0,0,0.8);
+    flex-direction: column;
+}
+
+.winnig-message button{
+    font-size: 2.5rem;
+    background-color:rgba( 65,185,131,1) ;
+    padding:10px 15px;
+    cursor:pointer;
+    border-radius:5px;
+    border:none;
+    margin-top:16px;
+    color:white
+}
+
+.winnig-message button:hover{
+    color:rgba( 65,185,131,1);
+    background-color:white;
+}
+
+.winnig-test{
+    color:white;
+    font-size:5rem
 }
